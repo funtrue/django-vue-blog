@@ -7,8 +7,8 @@ class UserDescSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'id',
+            # 'id',
             'username',
-            'last_login',
-            'date_joined'
+            # 'last_login',
+            # 'date_joined'
         ]

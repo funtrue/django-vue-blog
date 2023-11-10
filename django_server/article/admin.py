@@ -1,5 +1,5 @@
 from django.contrib import admin
-from article.models import Article, Category, Tag
+from article.models import Article, Category, Tag, Avatar
 
 class Article_Model_machineAdmin(admin.ModelAdmin):
     list_display = ('author', 'title', 'category', 'created', 'updated')
@@ -21,3 +21,4 @@ class Tag_Model_machineAdmin(admin.ModelAdmin):
 admin.site.register(Article,Article_Model_machineAdmin)
 admin.site.register(Category,Category_Model_machineAdmin)
 admin.site.register(Tag,Tag_Model_machineAdmin)
+admin.site.register(Avatar)

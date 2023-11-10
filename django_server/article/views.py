@@ -1,6 +1,6 @@
-from article.models import Article, Category, Tag
+from article.models import Article, Category, Tag, Avatar
 from article.serializers import ArticleSerializer, ArticleDetailSerializer, CategorySerializer, CategoryDetailSerializer, \
-    TagSerializer
+    TagSerializer, AvatarSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from article.permissions import IsAdminUserOrReadOnly
@@ -21,11 +21,15 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = self.queryset
         username = self.request.query_params.get('username', None)
-
         if username is not None:
             queryset = queryset.filter(author__username=username)
-
         return queryset
+    
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ArticleSerializer
+        else:
+            return ArticleDetailSerializer
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -50,6 +54,12 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    permission_classes = [IsAdminUserOrReadOnly]
+
+
+class AvatarViewSet(viewsets.ModelViewSet):
+    queryset = Avatar.objects.all()
+    serializer_class = AvatarSerializer
     permission_classes = [IsAdminUserOrReadOnly]
     
 
