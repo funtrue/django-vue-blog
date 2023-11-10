@@ -65,11 +65,10 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
 
 
 class ArticleBaseSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=True)                                               # 把文章的 id 值增加到接口数据中。
     author = UserDescSerializer(read_only=True)
-    # category 的嵌套序列化字段
-    category = CategorySerializer(read_only=True)
-    # category 的 id 字段，用于创建/更新 category 外键
-    category_id = serializers.IntegerField(write_only=True, allow_null=True, required=False)
+    category = CategorySerializer(read_only=True)                                               # category 的嵌套序列化字段
+    category_id = serializers.IntegerField(write_only=True, allow_null=True, required=False)    # category 的 id 字段，用于创建/更新 category 外键
     # tag 字段
     tags = serializers.SlugRelatedField(
         queryset=Tag.objects.all(),
