@@ -36,7 +36,7 @@ urlpatterns = [
     # 获取Token的接口
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # 刷新Token有效期的接口
-    path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # 验证Token的有效性
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/', include(router.urls)),
